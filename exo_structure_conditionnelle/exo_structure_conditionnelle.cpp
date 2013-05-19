@@ -143,6 +143,63 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	printf("Total a payer %lf euro\n", montantAPayer);
+	printf("--------------------------------------------\n");
+
+	/*
+		Exercice 6 : Annee Bissextile
+		On dit souvent qu'une annee est bissextile si son expression numerale est divisible par 4. Par exemple : 1980 est bissextile car
+		1980 est divisible par 4, alors que 1981 est non bissextile. Cette définition est erronnée car 1700 bien que divisible par 4
+		n'est pas une annee bissextile. En fait les annees seculaires telles que 1600, 1700, 1800 etc. Forme un cas particulier ;
+		la condition pour qu'une annee seculaires soit biessextile n'est plus d'etre divisible par 4 mais d'etre divisible par 400.
+		Ainsi 1300 n'est pas bissextile alors que 1600 est bissextile.
+
+		Ecrire l'algorithme qui determinera si une annee, saisie par l'utilisateur est bissextile ou non. Le resultat sera affiche
+		sous la forme de l'un des deux message suivant : "L'annee yyyy est bissextile." ou "L'annee yyyy n'est pas bissextile.".
+	*/
+
+	printf("--------------------------------------------\n");
+	printf("Voici le sixieme exercice du TD3, Annee bissextile.\n\n");
+
+	int annee;
+	bool bissextile;
+
+	printf("Entrez une annee.\n");
+	scanf_s("%d", &annee);
+
+	if(annee % 4 == 0 )
+	{
+		if(annee % 100 == 0)
+		{
+			if (annee % 400 == 0)
+			{
+				bissextile = true;
+			}
+			else
+			{
+				bissextile = false;
+			}
+		}
+		else
+		{
+			bissextile = true;
+		}
+	}
+	else
+	{
+		bissextile = false;
+	}
+
+	if(bissextile)
+	{
+		printf("L'annee %d est bissextile.\n", annee);
+	}
+	else
+	{
+		printf("L'annee %d n'est pas bissextile.\n", annee);
+	}
+
+	printf("--------------------------------------------\n");
+
 
 	return 0;
 }
