@@ -42,7 +42,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	int salaireNet;
 	int nombreAnnee;
-	int prime;
+	double prime;
 
 	printf("Entrez votre salaire net.\n");
 	scanf_s("%d", &salaireNet);
@@ -56,9 +56,53 @@ int _tmain(int argc, _TCHAR* argv[])
 		prime += 100;
 	}
 
-	printf("Votre prime de fin d'annee est de %d euros\n", prime);
+	printf("Votre prime de fin d'annee est de %d euro\n", prime);
 	printf("--------------------------------------------\n");
 	
+	/*
+		Exercice 4 : Train
+		A la gare Monparnasse, un voyageur s'arrête près d'un guichet automatique. Il souhaite connaitre le prix des billets
+		pour aller dans les villes de Chartres, Angers et Nantes.
+		Voici les tarif :
+
+		- Chartes : 20.5 €
+		- Angers : 40 €
+		- Nantes : 50.5 €
+
+		Ecrire l'algorithme qui affiche à l'écran le prix du billet correspondant à la ville saisie par le voyageur.
+		Affichage : "Un billet pour ... faut ... euro."
+	*/
+	printf("--------------------------------------------\n");
+	printf("Voici le quatrieme exercice du TD3, Train.\n\n");
+
+	int choix;
+	double chartres = 20.5;
+	double angers = 40;
+	double nantes = 50.5;
+
+	printf("Bienvenue a la gare de Monparnasse.\nSelectionnez votre destination :\n");
+	printf("1- Chartres : %d euro\n", chartres);
+	printf("2- Angers : %d euro\n", angers);
+	printf("3- Nantes : %d euro\n", nantes);
+
+	scanf_s("%d",&choix);
+	
+	switch (choix)
+	{
+		case 1:
+			printf("un billet pour Chartres vaut %d euro.\n", chartres);
+			break;
+
+		case 2:
+			printf("un billet pour Angers vaut %d euro.\n", angers);
+			break;
+		case 3:
+			printf("un billet pour Nantes vaut %d euro.\n", nantes);
+			break;
+		default:
+			printf("Vous devez choisir une destination.\n");
+			break;
+	}
 
 	return 0;
 }
