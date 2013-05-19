@@ -200,6 +200,57 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	printf("--------------------------------------------\n");
 
+	/*
+		Exercice 8 : Tarifs Postaux
+		Voila la tarification en vigeur pour les lettres en service rapide :
+		jusqu'a 
+		- 20g 0.50 euro
+		- 50g 0.75 euro
+		- 100g 1.11 euro
+		- 250g 1.90 euro
+		- 500g 2.65 euro
+
+		Ecrire un algorithme qui affiche le tarif net du timbre en fonction du poids de la lettre en gramme.
+		Le calcul du tarif est en fonction du poids et doit se faire uniquement en fonction de la majoation par rapport au tarif 
+		precedent.
+		Si la lettre est superrieur a 500g, le message suivant s'affiche "Veuillez vous renseigner aupres de votre bureau de poste.".
+	*/
+
+	printf("--------------------------------------------\n");
+	printf("Voici le huitieme exercice du TD3, Tarifs postaux.\n\n");
+
+	int poidsLettre;
+	
+
+	printf("Entrez le poids de votre colis.\n");
+	scanf_s("%d", &poidsLettre);
+
+	if(poidsLettre > 500)
+	{
+		printf("Veuillez vous renseigner aupres de votre bureau de poste.\n");
+	}
+	else if(poidsLettre > 250)
+	{
+		printf("Le tarif est de 2.65 euro.\n");
+	}
+	else if(poidsLettre > 100)
+	{
+		printf("Le tarif est de 1.90 euro.\n");
+	}
+	else if(poidsLettre > 50)
+	{
+		printf("Le tarif est de 1.11 euro.\n");
+	}
+	else if(poidsLettre > 20)
+	{
+		printf("Le tarif est de 0.75 euro.\n");
+	}
+	else
+	{
+		printf("Le tarif est de 0.50 euro.\n");
+	}
+	
+	printf("--------------------------------------------\n");
 
 	return 0;
 }
