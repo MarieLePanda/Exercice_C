@@ -33,8 +33,43 @@ int nombreDeJoueur()
 	}
 
 	return nbjoueur;
-
 }
+
+
+
+int niveauDifficulte()
+{
+	int difficulte;
+
+	printf("\tVous pouvez choisir 3 niveaux de diffculte different\n");
+	printf("\tQuel niveau voulez vous choisir ?\n");
+	printf("\t\t1- Niv 1 de 1 a 100\n");
+	printf("\t\t2- Niv 2 de 1 a 1 000\n");
+	printf("\t\t3- Niv 3 de 1 a 10 000\n");
+
+	scanf_s("%d", &difficulte);
+
+	switch (difficulte)
+	{
+	case 1 :
+		printf("\tVous avez choisie le niveau 1. Ca devrai le faire. :)\n");
+		break;
+	case 2 :
+		printf("\tVous avez choisie le niveau 2. T'es un peu un mec chaud toi. :|\n");
+		break;
+	case 3 :
+		printf("\tVous avez choisie le niveau 3. Merci de ne pas casser le clavier. :x\n");
+		break;
+	default:
+		printf("\tCe niveau n'est pas encore disponible. bientot promis\n\n");
+		difficulte = niveauDifficulte();
+		break;
+	}
+
+	return difficulte;
+}
+
+
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -45,6 +80,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	printf("\t\tChoix du nombre nombre de joueur\n");
 	printf("--------------------------------------------------------------------------------\n");
 	int nbjoueur = nombreDeJoueur();
+
+	printf("\t\tChoix de la difficulte\n");
+	printf("--------------------------------------------------------------------------------\n");
+	int difficulte = niveauDifficulte();
+
 	/*
 	int nombreMystere;
 	int proposition;
