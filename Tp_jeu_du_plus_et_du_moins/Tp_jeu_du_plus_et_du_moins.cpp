@@ -1,11 +1,21 @@
-// Tp_jeu_du_plus_et_du_moins.cpp : définit le point d'entrée pour l'application console.
-//
-	
+/*******************************************************************************\
+*								JEU DU PLUS OU MOINS							*
+*									MODE CONSOLE								*
+*									ECRIT EN C									*
+*										PAR										*
+*									MARIE LE PANDA								*
+\*******************************************************************************/
+
+
+//-_-_-_-_-_Bibliotheque a inclure_-_-_-_-_-\\
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "stdafx.h"
-#include <cstdlib> 
+#include "cstdlib" 
 #include "time.h"
+
+//-_-_-_-_-_Variable globale_-_-_-_-_-\\
 
 int nbJoueur;
 int difficulte;
@@ -13,7 +23,9 @@ int min = 0;
 int max;
 int nbCoupsMax = 10;
 
+//-_-_-_-_-_Fonction_-_-_-_-_-\\
 
+//Sert a mettre en place l'un des trois niveau de difficulte choisie par l'utilisateur
 void miseEnPlaceDeLaDifficulte()
 {
 	if(difficulte == 1)
@@ -31,7 +43,7 @@ void miseEnPlaceDeLaDifficulte()
 }
 
 
-
+//Sert a genere un nombre mystere aleatoirement ou saisie par un autre joueur
 int generationDuNombreMystere()
 {
 	int nombreMystere;
@@ -60,6 +72,9 @@ int generationDuNombreMystere()
 }
 
 
+//permet de tenter de trouver le nombre
+//Prend en parametre le nombre que le joueur doit trouver
+//Retourne si le joueur a trouver le nombre ou non
 bool jouer(int nbATrouver)
 {
 	int nbCoups = 0;
@@ -67,7 +82,6 @@ bool jouer(int nbATrouver)
 	bool trouve = false;
 	do
 	{
-		
 		printf("Dites un nombre : \n");
 		scanf_s("%d", &proposition);
 		nbCoups++;
@@ -91,7 +105,7 @@ bool jouer(int nbATrouver)
 }
 
 
-
+//Sert a definir le nombre de joueur qui vont jouer
 int nombreDeJoueur()
 {
 	int nbjoueur;
@@ -121,7 +135,7 @@ int nombreDeJoueur()
 }
 
 
-
+//Permet a l'utilisateur de choisir son niveau de difficulte
 int niveauDifficulte()
 {
 	int difficulte;
@@ -154,6 +168,8 @@ int niveauDifficulte()
 	return difficulte;
 }
 
+
+//Sert a afficher le menu en debut de jeu
 void menu()
 {
 	
@@ -199,7 +215,7 @@ void menu()
 }
 
 
-
+//Permet de lancer la partie
 void partie()
 {
 	int nombreMystere;	
@@ -252,7 +268,7 @@ void partie()
 }
 
 
-
+//Point d'entre de l'applaication
 int _tmain(int argc, _TCHAR* argv[])
 {
 
