@@ -22,6 +22,7 @@ int difficulte;
 int min = 0;
 int max;
 int nbCoupsMax = 10;
+bool valide;
 
 //-_-_-_-_-_Fonction_-_-_-_-_-\\
 
@@ -174,7 +175,6 @@ void menu()
 {
 	
 	int choix;
-	bool valide;
 
 	do
 	{
@@ -264,6 +264,10 @@ void partie()
 	{
 		menu();
 	}
+	else
+	{
+		valide = false;
+	}
 	
 }
 
@@ -274,10 +278,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	
 	srand(time(NULL));
-
-	menu();
-	partie();
 	
+	menu();
+	do
+	{		
+		partie();
+	}while(valide);
+
 	return 0;
 }
 
