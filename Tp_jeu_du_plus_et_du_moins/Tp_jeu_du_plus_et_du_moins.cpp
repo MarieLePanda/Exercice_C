@@ -9,6 +9,88 @@
 
 int nbJoueur;
 int difficulte;
+int min = 0;
+int max;
+int nbCoupsMax = 10;
+
+
+void miseEnPlaceDeLaDifficulte()
+{
+	if(difficulte == 1)
+		{
+			max = 100;
+		}
+		else if(difficulte == 2)
+		{
+			max = 1000;
+		}
+		else
+		{
+			max = 10000;
+		}
+}
+
+
+
+int generationDuNombreMystere()
+{
+	int nombreMystere;
+
+	if(nbJoueur == 1)
+	{
+		nombreMystere = (rand() %( max - min +1)) + min;
+	}
+	else
+	{
+		do
+		{
+		printf("--------------------------------------------------------------------------------\n");
+		printf("\tJoueur 1 : Selectionner un nombre mystere entre %d et %d:\n", min, max);
+		scanf_s("%d", &nombreMystere);
+		}while (!(nombreMystere >= min && nombreMystere <= max));
+				
+		for(int i = 0; i <80; i++)
+		{
+			printf("................................................................................\n");
+		}
+		printf("\tJoueur 2 : A vous de trouvez le nombre mystere.\n");
+	}
+
+	return nombreMystere;
+}
+
+
+bool jouer(int nbATrouver)
+{
+	int nbCoups = 0;
+	int proposition;
+	bool trouve = false;
+	do
+	{
+		
+		printf("Dites un nombre : \n");
+		scanf_s("%d", &proposition);
+		nbCoups++;
+
+		if( proposition < nbATrouver)
+		{
+			printf("C'est plus !\n");
+		}
+		else if(proposition > nbATrouver)
+		{
+			printf("C'est moins !\n");
+		}
+		else
+		{
+			trouve = true;
+		}
+
+	}while(!trouve && nbCoups < nbCoupsMax);
+
+	return trouve;
+}
+
+
 
 int nombreDeJoueur()
 {
@@ -113,6 +195,60 @@ void menu()
 		}
 
 	}while (!valide);
+
+}
+
+
+
+void partie()
+{
+	int nombreMystere;	
+	bool trouve;
+	int continuer;
+
+
+	do
+	{
+		printf("================================================================================\n");
+		printf("\t\t\t\tPARTIE\n");
+		printf("================================================================================\n");
+	
+		miseEnPlaceDeLaDifficulte();
+
+		nombreMystere = generationDuNombreMystere();
+
+		trouve = jouer(nombreMystere);
+
+		if (trouve)
+		{
+			printf("================================================================================\n");
+			printf("\t\t\t\tYOU WON\n");
+			printf("================================================================================\n");
+			printf("Feliciation le nombre mystere etait %d !\n", nombreMystere); 
+		}
+		else
+		{
+			printf("================================================================================\n");
+			printf("\t\t\t\tGAME OVER\n");
+			printf("================================================================================\n");
+			printf("Oh non ! Vous avez perdu !\nVous n'avez pas reussis a trouvez le nombre mystere a temps\n");
+			printf("Le nombre mystere etait %d\n", nombreMystere);
+		}
+
+		printf("\tQue voulez vous faire ?\n");
+		printf("\t\t1- Recommencer la partie\n");
+		printf("\t\t2- Retourner au menu\n");
+		printf("\t\t3- Quitter\n");
+
+		scanf_s("%d", &continuer);
+
+	} while (continuer == 1);
+
+	if(continuer == 2)
+	{
+		menu();
+	}
+	
 }
 
 
@@ -120,146 +256,11 @@ void menu()
 int _tmain(int argc, _TCHAR* argv[])
 {
 
-	int nombreMystere;
-	int nbCoupsMax = 10;
-	int min = 0;
-	int max;
-	int continuer;
+	
 	srand(time(NULL));
 
 	menu();
-
-	/*do
-	{
-		//Menu
-
-		int choix;
-
-		printf("================================================================================\n");
-		printf("\t\t\t\tMENU\n");
-		printf("================================================================================\n");
-		printf("\t\tChoix du nombre nombre de joueur\n");
-		printf("--------------------------------------------------------------------------------\n");
-		nbJoueur = nombreDeJoueur();
-
-		printf("--------------------------------------------------------------------------------\n");
-		printf("\t\tChoix de la difficulte\n");
-		printf("--------------------------------------------------------------------------------\n");
-		difficulte = niveauDifficulte();
-
-		printf("--------------------------------------------------------------------------------\n");
-		printf("\t\tResume\n");
-		printf("--------------------------------------------------------------------------------\n");
-		
-		printf("\tVous jouez donc a %d joueur(s), niveau de difficulte %d ?\n", nbJoueur, difficulte);
-		printf("\t\t 1- Oui. (Commencer la partie)\n");
-		printf("\t\t 2- Non. (Revenir au menu)\n");
-		scanf_s("%d", &choix);
-
-		if(choix == 1)
-		{
-			valide = true;
-			printf("\tLa partie va commencer.\n");
-		}
-		else
-		{
-			valide = false;
-		}
-
-	}while (!valide);*/
-
-	//Partie
-
-	printf("================================================================================\n");
-	printf("\t\t\t\tPARTIE\n");
-	printf("================================================================================\n");
-	
-	//Mise en place de la difficulte
-
-	if(difficulte == 1)
-	{
-		max = 100;
-	}
-	else if(difficulte == 2)
-	{
-		max = 1000;
-	}
-	else
-	{
-		max = 10000;
-	}
-
-	//Selection du nombre
-
-	if(nbJoueur == 1)
-	{
-		nombreMystere = (rand() %( max - min +1)) + min;
-	}
-	else
-	{
-		do
-		{
-		printf("--------------------------------------------------------------------------------\n");
-		printf("\tJoueur 1 : Selectionner un nombre mystere entre %d et %d:\n", min, max);
-		scanf_s("%d", &nombreMystere);
-		}while (!(nombreMystere >= min && nombreMystere <= max));
-				
-		for(int i = 0; i <80; i++)
-		{
-			printf("................................................................................\n");
-		}
-		printf("\tJoueur 2 : A vous de trouvez le nombre mystere.\n");
-	}
-
-	int nbCoups = 0;
-	int proposition;
-	bool trouve = false;
-	do
-	{
-		
-		printf("Dites un nombre : \n");
-		scanf_s("%d", &proposition);
-		nbCoups++;
-
-		if( proposition < nombreMystere)
-		{
-			printf("C'est plus !\n");
-		}
-		else if(proposition > nombreMystere)
-		{
-			printf("C'est moins !\n");
-		}
-		else
-		{
-			trouve = true;
-		}
-
-	}while(!trouve && nbCoups < nbCoupsMax);
-
-	if (trouve)
-	{
-		printf("================================================================================\n");
-		printf("\t\t\t\tYOU WON\n");
-		printf("================================================================================\n");
-		printf("Feliciation le nombre mystere etait %d, vous l'avez trouve en %d coup(s) !\n", nombreMystere, nbCoups); 
-	}
-	else
-	{
-		printf("================================================================================\n");
-		printf("\t\t\t\tGAME OVER\n");
-		printf("================================================================================\n");
-		printf("Oh non ! Vous avez perdu !\nVous n'avez pas reussis a trouvez le nombre mystere a temps\n");
-		printf("Le nombre mystere etait %d\n", nombreMystere);
-	}
-
-	printf("\tQue voulez vous faire ?\n");
-	printf("\t\t1- Recommencer la partie\n");
-	printf("\t\t2- Retourner au menu\n");
-	printf("\t\t3- Quitter\n");
-
-	scanf_s("%d", &continuer);
-
-
+	partie();
 	
 	return 0;
 }
