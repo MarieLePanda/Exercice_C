@@ -7,8 +7,45 @@
 #include <cstdlib> 
 #include "time.h"
 
+int nombreDeJoueur()
+{
+	int nbjoueur;
+
+	printf("\tA ce jeu vous pouvez jouer seul ou a deux.\n");
+	printf("\tA combien voulez vous jouer ?\n");
+	printf("\t\t1- Je veux jouez seul contre l'ordinateur\n");
+	printf("\t\t2- Je veux jouez avec un amis.\n");
+
+	scanf_s("%d", &nbjoueur);
+
+	switch (nbjoueur)
+	{
+	case 1 :
+		printf("\tTres bien vous allez jouer tous seul.\n");
+		break;
+	case 2 :
+		printf("\tTres bien vous allez jouer a deux.\n");
+		break;
+	default:
+		printf("\tCeci n'est pas possible.\n\n");
+		nbjoueur = nombreDeJoueur();
+		break;
+	}
+
+	return nbjoueur;
+
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
+
+	printf("================================================================================\n");
+	printf("\t\t\t\tMENU\n");
+	printf("================================================================================\n");
+	printf("\t\tChoix du nombre nombre de joueur\n");
+	printf("--------------------------------------------------------------------------------\n");
+	int nbjoueur = nombreDeJoueur();
+	/*
 	int nombreMystere;
 	int proposition;
 	int max = 100; 
@@ -51,7 +88,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		printf("oh non ! Vous avez perdu !\n");
 	}
-
+	*/
 	return 0;
 }
 
