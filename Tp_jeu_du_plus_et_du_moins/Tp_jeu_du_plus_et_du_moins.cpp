@@ -18,48 +18,47 @@
 
 //-_-_-_-_-_Variable globale_-_-_-_-_-\\
 
-int nbJoueur;
-int min = 0;
-int max;
-int nbCoupsMax = 10;
+
+const int min = 0;
+const int nbCoupsMax = 10;
 
 //-_-_-_-_-_Fonction_-_-_-_-_-\\
 
 //Sert a mettre en place l'un des trois niveau de difficulte choisie par l'utilisateur
-void miseEnPlaceDeLaDifficulte(int *pointeurDifficulte)
+void miseEnPlaceDeLaDifficulte(int *pointeurDifficulte, int *pointeurMax)
 {
 	if(*pointeurDifficulte == 1)
 		{
-			max = 100;
+			*pointeurMax = 100;
 		}
 		else if(*pointeurDifficulte == 2)
 		{
-			max = 1000;
+			*pointeurMax = 1000;
 		}
 		else
 		{
-			max = 10000;
+			*pointeurMax = 10000;
 		}
 }
 
 
 //Sert a genere un nombre mystere aleatoirement ou saisie par un autre joueur
-int generationDuNombreMystere()
+int generationDuNombreMystere(int *pointeurMax, int *pointeurNombreJoueur)
 {
 	int nombreMystere;
 
-	if(nbJoueur == 1)
+	if(*pointeurNombreJoueur == 1)
 	{
-		nombreMystere = (rand() %( max - min +1)) + min;
+		nombreMystere = (rand() %( *pointeurMax - min +1)) + min;
 	}
 	else
 	{
 		do
 		{
 		printf("--------------------------------------------------------------------------------\n");
-		printf("\tJoueur 1 : Selectionner un nombre mystere entre %d et %d:\n", min, max);
+		printf("\tJoueur 1 : Selectionner un nombre mystere entre %d et %d:\n", min, *pointeurMax);
 		scanf_s("%d", &nombreMystere);
-		}while (!(nombreMystere >= min && nombreMystere <= max));
+		}while (!(nombreMystere >= min && nombreMystere <= *pointeurMax));
 				
 		for(int i = 0; i <80; i++)
 		{
@@ -204,7 +203,7 @@ void menu()
 		{
 			valide = true;
 			printf("\tLa partie va commencer.\n");
-			partie(pointeurDifficulte);
+			partie(pointeurDifficulte, pointeurNombreJoueur);
 		}
 		else
 		{
@@ -217,12 +216,13 @@ void menu()
 
 
 //Permet de lancer la partie
-void partie(int *pointeurDifficulte)
+void partie(int *pointeurDifficulte, int *pointeurNombreJoueur)
 {
 	int nombreMystere;	
 	bool trouve;
 	int continuer;
-
+	int max;
+	int *pointeurMax = &max;
 
 	do
 	{
@@ -230,9 +230,9 @@ void partie(int *pointeurDifficulte)
 		printf("\t\t\t\tPARTIE\n");
 		printf("================================================================================\n");
 	
-		miseEnPlaceDeLaDifficulte(pointeurDifficulte);
+		miseEnPlaceDeLaDifficulte(pointeurDifficulte, pointeurMax);
 
-		nombreMystere = generationDuNombreMystere();
+		nombreMystere = generationDuNombreMystere(pointeurMax, pointeurNombreJoueur);
 
 		trouve = jouer(nombreMystere);
 
