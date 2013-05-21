@@ -24,7 +24,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="HeaderPlusMoins.h">
+    <ClInclude Include="FonctionTableau.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Tp_jeu_du_plus_et_du_moins.cpp">
+    <ClCompile Include="Exo_tableau.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

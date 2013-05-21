@@ -14,11 +14,11 @@
 #include "stdafx.h"
 #include "cstdlib" 
 #include "time.h"
+#include "HeaderPlusMoins.h"
 
 //-_-_-_-_-_Variable globale_-_-_-_-_-\\
 
 int nbJoueur;
-int difficulte;
 int min = 0;
 int max;
 int nbCoupsMax = 10;
@@ -26,13 +26,13 @@ int nbCoupsMax = 10;
 //-_-_-_-_-_Fonction_-_-_-_-_-\\
 
 //Sert a mettre en place l'un des trois niveau de difficulte choisie par l'utilisateur
-void miseEnPlaceDeLaDifficulte()
+void miseEnPlaceDeLaDifficulte(int *pointeurDifficulte)
 {
-	if(difficulte == 1)
+	if(*pointeurDifficulte == 1)
 		{
 			max = 100;
 		}
-		else if(difficulte == 2)
+		else if(*pointeurDifficulte == 2)
 		{
 			max = 1000;
 		}
@@ -136,19 +136,17 @@ int nombreDeJoueur()
 
 
 //Permet a l'utilisateur de choisir son niveau de difficulte
-int niveauDifficulte()
+void niveauDifficulte(int *pointeurDifficulte)
 {
-	int difficulte;
-
 	printf("\tVous pouvez choisir 3 niveaux de diffculte different\n");
 	printf("\tQuel niveau voulez vous choisir ?\n");
 	printf("\t\t1- Niv 1 de 1 a 100\n");
 	printf("\t\t2- Niv 2 de 1 a 1 000\n");
 	printf("\t\t3- Niv 3 de 1 a 10 000\n");
-
-	scanf_s("%d", &difficulte);
-
-	switch (difficulte)
+	int clavier;
+	scanf_s("%d", &clavier);
+	*pointeurDifficulte = clavier;
+	switch (*pointeurDifficulte)
 	{
 	case 1 :
 		printf("\tVous avez choisie le niveau 1. Ca devrai le faire. :)\n");
@@ -161,11 +159,11 @@ int niveauDifficulte()
 		break;
 	default:
 		printf("\tCe niveau n'est pas encore disponible. bientot promis\n\n");
-		difficulte = niveauDifficulte();
+		niveauDifficulte(pointeurDifficulte);
 		break;
 	}
 
-	return difficulte;
+	//return difficulte;
 }
 
 
@@ -175,6 +173,8 @@ void menu()
 	
 	int choix;
 	bool valide;
+	int difficulte;
+	int *pointeurDifficulte = &difficulte;
 
 	do
 	{
@@ -189,7 +189,7 @@ void menu()
 		printf("--------------------------------------------------------------------------------\n");
 		printf("\t\tChoix de la difficulte\n");
 		printf("--------------------------------------------------------------------------------\n");
-		difficulte = niveauDifficulte();
+		niveauDifficulte(pointeurDifficulte);
 
 		printf("--------------------------------------------------------------------------------\n");
 		printf("\t\tResume\n");
@@ -204,6 +204,7 @@ void menu()
 		{
 			valide = true;
 			printf("\tLa partie va commencer.\n");
+			partie(pointeurDifficulte);
 		}
 		else
 		{
@@ -216,7 +217,7 @@ void menu()
 
 
 //Permet de lancer la partie
-void partie()
+void partie(int *pointeurDifficulte)
 {
 	int nombreMystere;	
 	bool trouve;
@@ -229,7 +230,7 @@ void partie()
 		printf("\t\t\t\tPARTIE\n");
 		printf("================================================================================\n");
 	
-		miseEnPlaceDeLaDifficulte();
+		miseEnPlaceDeLaDifficulte(pointeurDifficulte);
 
 		nombreMystere = generationDuNombreMystere();
 
@@ -276,7 +277,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	srand(time(NULL));
 
 	menu();
-	partie();
+	
 	
 	return 0;
 }
