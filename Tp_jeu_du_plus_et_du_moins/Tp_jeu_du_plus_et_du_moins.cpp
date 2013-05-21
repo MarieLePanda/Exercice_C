@@ -106,18 +106,18 @@ bool jouer(int nbATrouver)
 
 
 //Sert a definir le nombre de joueur qui vont jouer
-int nombreDeJoueur()
+void nombreDeJoueur(int *pointeurNombreJoueur)
 {
-	int nbjoueur;
+
 
 	printf("\tA ce jeu vous pouvez jouer seul ou a deux.\n");
 	printf("\tA combien voulez vous jouer ?\n");
 	printf("\t\t1- Je veux jouez seul contre l'ordinateur\n");
 	printf("\t\t2- Je veux jouez avec un amis.\n");
 
-	scanf_s("%d", &nbjoueur);
+	scanf_s("%d", pointeurNombreJoueur);
 
-	switch (nbjoueur)
+	switch (*pointeurNombreJoueur)
 	{
 	case 1 :
 		printf("\tTres bien vous allez jouer tous seul.\n");
@@ -127,11 +127,9 @@ int nombreDeJoueur()
 		break;
 	default:
 		printf("\tCeci n'est pas possible.\n\n");
-		nbjoueur = nombreDeJoueur();
+		nombreDeJoueur(pointeurNombreJoueur);
 		break;
 	}
-
-	return nbjoueur;
 }
 
 
@@ -143,9 +141,9 @@ void niveauDifficulte(int *pointeurDifficulte)
 	printf("\t\t1- Niv 1 de 1 a 100\n");
 	printf("\t\t2- Niv 2 de 1 a 1 000\n");
 	printf("\t\t3- Niv 3 de 1 a 10 000\n");
-	int clavier;
-	scanf_s("%d", &clavier);
-	*pointeurDifficulte = clavier;
+	
+	scanf_s("%d", pointeurDifficulte);
+	*pointeurDifficulte;
 	switch (*pointeurDifficulte)
 	{
 	case 1 :
@@ -175,6 +173,8 @@ void menu()
 	bool valide;
 	int difficulte;
 	int *pointeurDifficulte = &difficulte;
+	int nbJoueur;
+	int *pointeurNombreJoueur = &nbJoueur;
 
 	do
 	{
@@ -184,7 +184,7 @@ void menu()
 		printf("================================================================================\n");
 		printf("\t\tChoix du nombre nombre de joueur\n");
 		printf("--------------------------------------------------------------------------------\n");
-		nbJoueur = nombreDeJoueur();
+		nombreDeJoueur(pointeurNombreJoueur);
 
 		printf("--------------------------------------------------------------------------------\n");
 		printf("\t\tChoix de la difficulte\n");
